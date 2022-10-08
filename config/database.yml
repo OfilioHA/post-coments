@@ -15,7 +15,7 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: ofilio
   password: Mysql1_Root2#
-  database: post_coments
+  database: post_comments
   socket: /var/run/mysqld/mysqld.sock
 
 development:
