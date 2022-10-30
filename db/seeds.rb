@@ -6,19 +6,27 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-Post.destroy_all
 Comment.destroy_all
+Post.destroy_all
 
-post1 = Post.create(
-    title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-    body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet euismod enim. Morbi id consectetur orci. Proin sit amet nunc faucibus, mollis ligula ac. ",
-    state: 1
-)
+(1..200).each do |item|
+    Post.create([
+        title: Faker::Lorem.sentence(word_count: 3, supplemental: false, random_words_to_add: 0).chop,
+        body: Faker::Lorem.sentence(word_count: 25, supplemental: false, random_words_to_add: 0).chop,
+        state: rand(0..1),      
+    ])
+end
 
-coment1 = Comment.create(
-    title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-    body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet euismod enim. Morbi id consectetur orci. Proin sit amet nunc faucibus, mollis ligula ac. ",
-    state: 1,
-    post: post1
-)
+posts = Post.all
+posts.each do | post |
+    amount = rand(1..15);
+    for iterator in 1..amount do
+        Comment.create(
+            title: Faker::Lorem.sentence(word_count: 3, supplemental: false, random_words_to_add: 0).chop,
+            body: Faker::Lorem.sentence(word_count: 3, supplemental: false, random_words_to_add: 0).chop,
+            state: rand(0..1),
+            post_id: post['id']
+        )
+    end
+end
 
